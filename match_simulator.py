@@ -1,4 +1,6 @@
 import random
+from player import Player
+from team import Team
 from collections import Counter
 
 # --- Helper Functions ---

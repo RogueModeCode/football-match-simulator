@@ -105,6 +105,21 @@ if __name__ == "__main__":
     arsenal.display_team()
     print (calculate_team_strength(arsenal))
 
+    #Cael's Team
+    chelsea = Team("Chelsea FC")
+    chelsea_players = [
+        Player("Jackson", "FWD", 82),
+        Player("Palmer", "MID", 86),
+        Player("Caicedo", "MID", 80),
+        Player("Fernandez", "MID", 82),
+        Player("Neto", "MID", 82),
+        Player("Madueke", "MID", 80),
+        Player("Fofana", "DEF", 79),
+        Player("Gusto", "DEF", 80),
+        Player("Cucurella", "DEF", 84),
+        Player("Colwill", "DEF", 79),
+        Player("Sanchez", "GK", 79)]
+
 
     # Create some sample players
     players_pool = [

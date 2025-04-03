@@ -59,21 +59,45 @@ def find_mvp(events):
     return mvp
 
 
+
 # --- Example Usage ---
 if __name__ == "__main__":
+
+    
+    # Logan's team
+    logans_team = Team("Plymouth Argyle FC")
+    plymouth_players = [
+        Player("Whittaker", "FWD", 74),
+        Player("Forshaw", "MID", 71),
+        Player("Mumba", "DEF", 71),
+        Player("Hardie", "FWD", 70),
+        Player("Pálsson", "DEF", 70),
+        Player("Tijani", "FWD", 70),
+        Player("Gibson", "DEF", 69),
+        Player("Hazard", "GK", 68),
+        Player("Randell", "Mid", 68),
+        Player("Pleguezuelo", "DEF", 68),
+        Player("Houghton", "MID", 67),
+    ]
+    for player in plymouth_players:
+        logans_team.add_player(player)
+
+    logans_team.display_team()
+    print (calculate_team_strength(logans_team))
+
     # Create some sample players
     players_pool = [
-        Player("Messi", "FWD", 12, 95),
-        Player("Ronaldo", "FWD", 12, 93),
-        Player("Modric", "MID", 10, 90),
-        Player("De Bruyne", "MID", 11, 92),
-        Player("Van Dijk", "DEF", 9, 89),
-        Player("Alisson", "GK", 8, 90),
-        Player("Hakimi", "DEF", 8, 86),
-        Player("Kante", "MID", 9, 88),
-        Player("Kane", "FWD", 11, 91),
-        Player("Neuer", "GK", 7, 88),
-        Player("Walker", "DEF", 8, 85),
+        Player("Messi", "FWD", 95),
+        Player("Ronaldo", "FWD", 93),
+        Player("Modric", "MID", 90),
+        Player("De Bruyne", "MID", 92),
+        Player("Van Dijk", "DEF", 89),
+        Player("Alisson", "GK", 90),
+        Player("Hakimi", "DEF", 86),
+        Player("Kante", "MID", 88),
+        Player("Kane", "FWD", 91),
+        Player("Neuer", "GK", 88),
+        Player("Walker", "DEF", 85),
     ]
 
     # Create teams
@@ -85,9 +109,10 @@ if __name__ == "__main__":
         team_a.add_player(random.choice(players_pool))
         team_b.add_player(random.choice(players_pool))
 
-    team_a.display_team()
-    team_b.display_team()
+    # team_a.display_team()
+    # team_b.display_team()
+    print (calculate_team_strength(team_b))
 
     # Simulate match
-    score1, score2, events = simulate_match(team_a, team_b)
-    generate_match_report(team_a, team_b, score1, score2, events)
+    score1, score2, events = simulate_match(logans_team, team_b)
+    generate_match_report(logans_team, team_b, score1, score2, events)

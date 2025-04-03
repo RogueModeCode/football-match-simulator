@@ -85,6 +85,27 @@ if __name__ == "__main__":
     logans_team.display_team()
     print (calculate_team_strength(logans_team))
 
+    #Jonahs Team
+    arsenal = Team("Arsenal FC")
+    arsenal_players = [
+            Player("Saka", "FWD", 87),
+            Player("Havertz", "FWD", 83),
+            Player("Martinelli", "FWD", 83),
+            Player("Ødegaard", "MID", 89),
+            Player("Rice", "MID", 87),
+            Player("Nwaneri", "MID", 76),
+            Player("Lewis-Skelly", "DEF", 81),
+            Player("Gabriel", "DEF", 86),
+            Player("Saliba", "DEF", 87),
+            Player("Timber", "DEF", 84),
+            Player("Raya", "GK", 83)]
+    for player in arsenal_players:
+        arsenal.add_player(player)
+
+    arsenal.display_team()
+    print (calculate_team_strength(arsenal))
+
+
     # Create some sample players
     players_pool = [
         Player("Messi", "FWD", 95),

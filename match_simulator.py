@@ -155,5 +155,5 @@ if __name__ == "__main__":
     # team_b.display_team()
 
     # Simulate match
-    score1, score2, events = simulate_match(arsenal, chelsea)
-    generate_match_report(arsenal, chelsea, score1, score2, events)
+    score1, score2, events = simulate_match(plymouth_argyle, chelsea)
+    generate_match_report(plymouth_argyle, chelsea, score1, score2, events)

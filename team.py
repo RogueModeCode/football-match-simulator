@@ -1,4 +1,5 @@
 # --- Team Class ---
+from player import Player
 class Team:
     def __init__(self, name):
         self.name = name

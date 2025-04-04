@@ -20,6 +20,13 @@ class Team:
         for player in self.players:
             print(player)
 
+    def __str__(self):
+        result = f"\nTeam: {self.name}"
+        for player in self.players:
+            result+= str(player) +"\n"
+
+        return result
+
     def team_strength(self):
         total = 0
         for player in self.players:

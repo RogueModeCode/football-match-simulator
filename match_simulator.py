@@ -66,17 +66,18 @@ def find_mvp(events):
 # --- Example Usage ---
 if __name__ == "__main__":
 
-    plymouth_argyle.display_team()
+    # plymouth_argyle.display_team()
+    print(plymouth_argyle)
     print( plymouth_argyle.team_strength() )
 
-    arsenal.display_team()
-    print(arsenal.team_strength() )
+    # arsenal.display_team()
+    # print(arsenal.team_strength() )
     
-    chelsea.display_team()
-    print(chelsea.team_strength() )
+    # chelsea.display_team()
+    # print(chelsea.team_strength() )
 
-    famalicao.display_team()
-    print(famalicao.team_strength() )
+    # famalicao.display_team()
+    # print(famalicao.team_strength() )
 
     # Simulate match
     score1, score2, events = simulate_match(arsenal, famalicao)

@@ -65,7 +65,7 @@ if __name__ == "__main__":
 
     
     # Logan's team
-    logans_team = Team("Plymouth Argyle FC")
+    plymouth_argyle = Team("Plymouth Argyle FC")
     plymouth_players = [
         Player("Whittaker", "FWD", 74),
         Player("Forshaw", "MID", 71),
@@ -80,10 +80,10 @@ if __name__ == "__main__":
         Player("Houghton", "MID", 67),
     ]
     for player in plymouth_players:
-        logans_team.add_player(player)
+        plymouth_argyle.add_player(player)
 
-    logans_team.display_team()
-    print (calculate_team_strength(logans_team))
+    plymouth_argyle.display_team()
+    print (calculate_team_strength(plymouth_argyle))
 
     #Jonahs Team
     arsenal = Team("Arsenal FC")
@@ -98,7 +98,8 @@ if __name__ == "__main__":
             Player("Gabriel", "DEF", 86),
             Player("Saliba", "DEF", 87),
             Player("Timber", "DEF", 84),
-            Player("Raya", "GK", 83)]
+            Player("Raya", "GK", 83)
+    ]
     for player in arsenal_players:
         arsenal.add_player(player)
 
@@ -118,8 +119,13 @@ if __name__ == "__main__":
         Player("Gusto", "DEF", 80),
         Player("Cucurella", "DEF", 84),
         Player("Colwill", "DEF", 79),
-        Player("Sanchez", "GK", 79)]
+        Player("Sanchez", "GK", 79)
+    ]
+    for player in  chelsea_players:
+        chelsea.add_player(player)
 
+    chelsea.display_team()
+    print (calculate_team_strength(chelsea))
 
     # Create some sample players
     players_pool = [
@@ -147,8 +153,7 @@ if __name__ == "__main__":
 
     # team_a.display_team()
     # team_b.display_team()
-    print (calculate_team_strength(team_b))
 
     # Simulate match
-    score1, score2, events = simulate_match(logans_team, team_b)
-    generate_match_report(logans_team, team_b, score1, score2, events)
+    score1, score2, events = simulate_match(arsenal, chelsea)
+    generate_match_report(arsenal, chelsea, score1, score2, events)

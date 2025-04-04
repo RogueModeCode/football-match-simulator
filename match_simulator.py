@@ -8,19 +8,7 @@ from teams_database import plymouth_argyle, famalicao, chelsea, arsenal
 SCORE_PER_MIN_PROB = 0.05
 CARD_PER_MIN_PROB = 0.036
 
-POSITION_STRENGTH = { "GK": 1.2, "DEF": 1.0, "MID":1.1, "FWD": 1.2 }
-
-# --- Helper Functions ---
-def calculate_team_strength(team):
-    total = 0
-    for player in team.players:
-        total += player.rating * POSITION_STRENGTH[player.position.upper()] 
-        
-    return total
-
 def simulate_match(team1, team2):
-    team1_strength = calculate_team_strength(team1)
-    team2_strength = calculate_team_strength(team2)
 
     score1 = 0
     score2 = 0
@@ -31,7 +19,7 @@ def simulate_match(team1, team2):
     for second in range(1, 90 * 60):
         # scoring event
         if random.random() < SCORE_PER_MIN_PROB/60:  
-            if random.random() < team1_strength / (team1_strength + team2_strength):
+            if random.random() < team1.team_strength() / (team1.team_strength() + team2.team_strength()):
                 scorer = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID"])
                 score1 += 1
                 events.append((round(second/60), f"{scorer.name} scored for {team1.name}"))
@@ -51,7 +39,6 @@ def simulate_match(team1, team2):
                 events.append((round(second/60), f"{carded.name} was given a red card"))
                 
             
-
     return score1, score2, events
 
 
@@ -80,16 +67,16 @@ def find_mvp(events):
 if __name__ == "__main__":
 
     plymouth_argyle.display_team()
-    print (calculate_team_strength(plymouth_argyle))
+    print( plymouth_argyle.team_strength() )
 
     arsenal.display_team()
-    print (calculate_team_strength(arsenal))
+    print(arsenal.team_strength() )
     
     chelsea.display_team()
-    print (calculate_team_strength(chelsea))
+    print(chelsea.team_strength() )
 
     famalicao.display_team()
-    print (calculate_team_strength(famalicao))
+    print(famalicao.team_strength() )
 
     # Simulate match
     score1, score2, events = simulate_match(arsenal, famalicao)

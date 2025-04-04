@@ -8,7 +8,7 @@ def calculate_team_strength(team):
     total = 0
     for player in team.players:
         if player.position == "GK":
-            total += player.rating * 0.9
+            total += player.rating * 1.2
         elif player.position == "DEF":
             total += player.rating * 1.0
         elif player.position == "MID":
@@ -24,20 +24,36 @@ def simulate_match(team1, team2):
 
     score1 = 0
     score2 = 0
+    y_cards = 0
+    r_cards = 0
     events = []
 
-    for minute in range(1, 91):
-        if random.random() < 0.05:  # 5% chance per minute of a scoring event
+    for second in range(1, 5400):
+        if random.random() < 0.00083:  # 5% chance per minute of a scoring event
             if random.random() < team1_strength / (team1_strength + team2_strength):
                 scorer = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID"])
                 score1 += 1
-                events.append((minute, f"{scorer.name} scored for {team1.name}"))
+                events.append((round(second/60), f"{scorer.name} scored for {team1.name}"))
             else:
                 scorer = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID"])
                 score2 += 1
-                events.append((minute, f"{scorer.name} scored for {team2.name}"))
+                events.append((round(second/60), f"{scorer.name} scored for {team2.name}"))
+            
+        if random.random() < .0006:
+            carded = random.choice([p for p in team1.players or team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+            if random.random() < .95:
+                y_cards += 1
+                events.append((round(second/60), f"{carded.name} was given a yellow card"))
+            else:
+                r_cards += 1
+                events.append((round(second/60), f"{carded.name} was given a red card"))
+                
+            
 
     return score1, score2, events
+
+    
+
 
 
 def generate_match_report(team1, team2, score1, score2, events):
@@ -48,7 +64,7 @@ def generate_match_report(team1, team2, score1, score2, events):
 
     if events:
         mvp = find_mvp(events)
-        print(f"\n🌟 MVP of the Match: {mvp}")
+        print(f"\n🌟 Man of the Match: {mvp}")
     else:
         print("\nNo goals were scored.")
 
@@ -104,6 +120,7 @@ if __name__ == "__main__":
 
     arsenal.display_team()
     print (calculate_team_strength(arsenal))
+    
 
 
     # Create some sample players
@@ -132,8 +149,10 @@ if __name__ == "__main__":
 
     # team_a.display_team()
     # team_b.display_team()
-    print (calculate_team_strength(team_b))
+    #print (calculate_team_strength(team_b))
 
     # Simulate match
-    score1, score2, events = simulate_match(logans_team, team_b)
-    generate_match_report(logans_team, team_b, score1, score2, events)
+    score1, score2, events = simulate_match(logans_team, arsenal)
+    generate_match_report(logans_team, arsenal, score1, score2, events)
+    #score1, score2, events = simulate_match(team_a, arsenal)
+    #generate_match_report(team_a, arsenal, score1, score2, events)

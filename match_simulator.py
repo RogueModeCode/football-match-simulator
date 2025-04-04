@@ -66,19 +66,15 @@ def find_mvp(events):
 # --- Example Usage ---
 if __name__ == "__main__":
 
-    # plymouth_argyle.display_team()
-    print(plymouth_argyle)
-    print( plymouth_argyle.team_strength() )
+    team1 = plymouth_argyle
+    team2 = chelsea
+    league_array = [plymouth_argyle, arsenal, chelsea, famalicao]
 
-    # arsenal.display_team()
-    # print(arsenal.team_strength() )
-    
-    # chelsea.display_team()
-    # print(chelsea.team_strength() )
-
-    # famalicao.display_team()
-    # print(famalicao.team_strength() )
+    for team in league_array:
+        if team == team1 or team == team2:
+            team.display_team()
+            print(team.display_team)
 
     # Simulate match
-    score1, score2, events = simulate_match(arsenal, famalicao)
-    generate_match_report(arsenal, famalicao, score1, score2, events)
+    score1, score2, events = simulate_match(team1, team2)
+    generate_match_report(team1, team2, score1, score2, events)

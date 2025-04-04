@@ -81,7 +81,7 @@ if __name__ == "__main__":
 
     
     # Logan's team
-    logans_team = Team("Plymouth Argyle FC")
+    plymouth_argyle = Team("Plymouth Argyle FC")
     plymouth_players = [
         Player("Whittaker", "FWD", 74),
         Player("Forshaw", "MID", 71),
@@ -96,10 +96,10 @@ if __name__ == "__main__":
         Player("Houghton", "MID", 67),
     ]
     for player in plymouth_players:
-        logans_team.add_player(player)
+        plymouth_argyle.add_player(player)
 
-    logans_team.display_team()
-    print (calculate_team_strength(logans_team))
+    plymouth_argyle.display_team()
+    print (calculate_team_strength(plymouth_argyle))
 
     #Jonahs Team
     arsenal = Team("Arsenal FC")
@@ -114,7 +114,8 @@ if __name__ == "__main__":
             Player("Gabriel", "DEF", 86),
             Player("Saliba", "DEF", 87),
             Player("Timber", "DEF", 84),
-            Player("Raya", "GK", 83)]
+            Player("Raya", "GK", 83)
+    ]
     for player in arsenal_players:
         arsenal.add_player(player)
 
@@ -122,6 +123,47 @@ if __name__ == "__main__":
     print (calculate_team_strength(arsenal))
     
 
+    #Cael's Team
+    chelsea = Team("Chelsea FC")
+    chelsea_players = [
+        Player("Jackson", "FWD", 82),
+        Player("Palmer", "MID", 86),
+        Player("Caicedo", "MID", 80),
+        Player("Fernandez", "MID", 82),
+        Player("Neto", "MID", 82),
+        Player("Madueke", "MID", 80),
+        Player("Fofana", "DEF", 79),
+        Player("Gusto", "DEF", 80),
+        Player("Cucurella", "DEF", 84),
+        Player("Colwill", "DEF", 79),
+        Player("Sanchez", "GK", 79)
+    ]
+    for player in  chelsea_players:
+        chelsea.add_player(player)
+
+    chelsea.display_team()
+    print (calculate_team_strength(chelsea))
+
+    #Levis Team
+    famalicao = Team("FC Famalicao")
+    famalicao_players = [
+            Player("Youssouf", "FWD", 76),
+            Player("Rochinha", "FWD", 74),
+            Player("Gonzalez", "FWD", 71),
+            Player("Sa", "MID", 72),
+            Player("Topic", "MID", 70),
+            Player("Aranda", "MID", 68),
+            Player("de Haas", "DEF", 69),
+            Player("Soares", "DEF", 70),
+            Player("Mihaj", "DEF", 70),
+            Player("Riccieli", "DEF", 72),
+            Player("Zlobin", "GK", 67)
+    ]
+    for player in famalicao_players:
+        famalicao.add_player(player)
+
+    famalicao.display_team()
+    print (calculate_team_strength(famalicao))
 
     # Create some sample players
     players_pool = [
@@ -149,10 +191,7 @@ if __name__ == "__main__":
 
     # team_a.display_team()
     # team_b.display_team()
-    #print (calculate_team_strength(team_b))
 
     # Simulate match
-    score1, score2, events = simulate_match(logans_team, arsenal)
-    generate_match_report(logans_team, arsenal, score1, score2, events)
-    #score1, score2, events = simulate_match(team_a, arsenal)
-    #generate_match_report(team_a, arsenal, score1, score2, events)
+    score1, score2, events = simulate_match(arsenal, famalicao)
+    generate_match_report(arsenal, famalicao, score1, score2, events)

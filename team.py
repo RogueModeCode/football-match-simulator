@@ -1,4 +1,5 @@
 from player import Player
+import random 
 
 POSITION_STRENGTH = { "GK": 1.2, "DEF": 1.0, "MID":1.1, "FWD": 1.2 }
 
@@ -33,3 +34,8 @@ class Team:
             total += player.rating * POSITION_STRENGTH[player.position.upper()] 
         
         return total
+    
+    def random_player_by_position(self, position):
+        random_player = random.choice([p for p in self.players if p.position == position])
+        return random_player
+

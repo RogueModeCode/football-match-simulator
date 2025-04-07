@@ -24,9 +24,9 @@ def simulate_match(team1, team2):
                 scoring_weight = []
                 for p in team1.players:
                     if p.position == "FWD":
-                        scoring_weight.extend([p] * 7)
+                        scoring_weight.extend([p] * 5)
                     elif p.position == "MID":
-                        scoring_weight.extend([p] * 6)
+                        scoring_weight.extend([p] * 4)
                     elif p.position == "DEF":
                         scoring_weight.append(p)
                 scorer = random.choice(scoring_weight)
@@ -47,9 +47,9 @@ def simulate_match(team1, team2):
                 scoring_weight = []
                 for p in team1.players:
                     if p.position == "FWD":
-                        scoring_weight.extend([p] * 7)
+                        scoring_weight.extend([p] * 5)
                     elif p.position == "MID":
-                        scoring_weight.extend([p] * 6)
+                        scoring_weight.extend([p] * 4)
                     elif p.position == "DEF":
                         scoring_weight.append(p)
                 scorer = random.choice(scoring_weight)

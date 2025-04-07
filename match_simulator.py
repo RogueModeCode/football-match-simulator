@@ -22,59 +22,12 @@ def simulate_match(team1, team2):
 
     for second in range(1, 90 * 60):
         # scoring event
-        if random.random() < SCORE_PER_MIN_PROB/60:  
+        if random.random() < SCORE_PER_MIN_PROB/60:
             if random.random() < team1.team_strength() / (team1.team_strength() + team2.team_strength()):
-
-                scoring_probabilty = random.random() 
-                if scoring_probabilty < FORWARD_SCORING_PROB:
-                    scorer = team1.random_player_by_position("FWD")
-                elif scoring_probabilty < FORWARD_SCORING_PROB + MIDFIELD_SCORING_PROB:
-                    scorer = team1.random_player_by_position("MID")
-                elif scoring_probabilty < FORWARD_SCORING_PROB + MIDFIELD_SCORING_PROB + DEFENDER_SCORING_PROB:
-                    scorer = team1.random_player_by_position("DEF")
-                else:
-                    scorer = team1.random_player_by_position("GK")
-
-                goalie = team2.random_player_by_position("GK")
-
-                if random.random()*goalie.rating > random.random()*scorer.rating:
-                    #shot saved
-                    events.append((round(second/60), f"{goalie.name} saved {scorer.name}'s shot"))
-                else: 
-                    #shot scored   
-                    score1 += 1
-                    assister = random.choice([p for p in team1.players])
-                    if assister == scorer:
-                        events.append((round(second/60), f"{scorer.name} scored for {team1.name}"))
-                    else:
-                        events.append((round(second/60), f"{scorer.name} scored for {team1.name} and was assisted by {assister.name}"))
-
+                score1 = simulate_scoring_event(team1, team2, second, events, score1)
             else:
-                goalie = team1.random_player_by_position("GK")
-
-                #goalie = random.choice([p for p in team1.players if p.position == "GK"])
-                scoring_weight = []
-                for p in team2.players:
-                    if p.position == "FWD":
-                        scoring_weight.extend([p] * 5)
-                    elif p.position == "MID":
-                        scoring_weight.extend([p] * 4)
-                    elif p.position == "DEF":
-                        scoring_weight.append(p)
-                scorer = random.choice(scoring_weight)
-                if random.random()*goalie.rating > random.random()*scorer.rating:
-                    #shot saved
-                    events.append((round(second/60), f"{goalie.name} saved {scorer.name}'s shot"))
-                else: 
-                    #shot scored   
-                    score2 += 1
-                    assister = random.choice([p for p in team2.players])
-                    if assister == scorer:
-                        events.append((round(second/60), f"{scorer.name} scored for {team2.name}"))
-                    else:
-                        events.append((round(second/60), f"{scorer.name} scored for {team2.name} and was assisted by {assister.name}"))
-                    
-
+                score2 = simulate_scoring_event(team2, team1, second, events, score2)
+        
         # card event    
         if random.random() < CARD_PER_MIN_PROB/60:
             carded = random.choice([p for p in team1.players or team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
@@ -89,6 +42,34 @@ def simulate_match(team1, team2):
     return score1, score2, events
 
 
+def simulate_scoring_event(attacking_team, defending_team, second, events, attacking_team_score): 
+
+        scoring_probabilty = random.random() 
+        if scoring_probabilty < FORWARD_SCORING_PROB:
+            scorer = attacking_team.random_player_by_position("FWD")
+        elif scoring_probabilty < FORWARD_SCORING_PROB + MIDFIELD_SCORING_PROB:
+            scorer = attacking_team.random_player_by_position("MID")
+        elif scoring_probabilty < FORWARD_SCORING_PROB + MIDFIELD_SCORING_PROB + DEFENDER_SCORING_PROB:
+            scorer = attacking_team.random_player_by_position("DEF")
+        else:
+            scorer = attacking_team.random_player_by_position("GK")
+
+        goalie = defending_team.random_player_by_position("GK")
+
+        if random.random()*goalie.rating > random.random()*scorer.rating:
+            #shot saved
+            events.append((round(second/60), f"{goalie.name} saved {scorer.name}'s shot"))
+        else: 
+            #shot scored   
+            attacking_team_score += 1
+            assister = random.choice([p for p in attacking_team.players])
+            if assister == scorer:
+                events.append((round(second/60), f"{scorer.name} scored for {attacking_team.name}"))
+            else:
+                events.append((round(second/60), f"{scorer.name} scored for {attacking_team.name} and was assisted by {assister.name}"))
+
+        
+        return attacking_team_score
 
 def generate_match_report(team1, team2, score1, score2, events):
     print(f"\n🏁 Final Score: {team1.name} {score1} - {score2} {team2.name}")

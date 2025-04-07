@@ -21,7 +21,15 @@ def simulate_match(team1, team2):
         if random.random() < SCORE_PER_MIN_PROB/60:  
             if random.random() < team1.team_strength() / (team1.team_strength() + team2.team_strength()):
                 goalie = random.choice([p for p in team2.players if p.position == "GK"])
-                scorer = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID"])
+                scoring_weight = []
+                for p in team1.players:
+                    if p.position == "FWD":
+                        scoring_weight.extend([p] * 7)
+                    elif p.position == "MID":
+                        scoring_weight.extend([p] * 6)
+                    elif p.position == "DEF":
+                        scoring_weight.append(p)
+                scorer = random.choice(scoring_weight)
                 if random.random()*goalie.rating > random.random()*scorer.rating:
                     #shot saved
                     events.append((round(second/60), f"{goalie.name} saved {scorer.name}'s shot"))
@@ -36,7 +44,15 @@ def simulate_match(team1, team2):
 
             else:
                 goalie = random.choice([p for p in team1.players if p.position == "GK"])
-                scorer = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID"])
+                scoring_weight = []
+                for p in team1.players:
+                    if p.position == "FWD":
+                        scoring_weight.extend([p] * 7)
+                    elif p.position == "MID":
+                        scoring_weight.extend([p] * 6)
+                    elif p.position == "DEF":
+                        scoring_weight.append(p)
+                scorer = random.choice(scoring_weight)
                 if random.random()*goalie.rating > random.random()*scorer.rating:
                     #shot saved
                     events.append((round(second/60), f"{goalie.name} saved {scorer.name}'s shot"))

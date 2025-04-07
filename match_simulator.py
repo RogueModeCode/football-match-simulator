@@ -95,9 +95,13 @@ def generate_match_report(team1, team2, score1, score2, events):
 
 
 def find_mvp(events):
-    scorers = [event.split()[0] for _, event in events if "scored" in event]
-    mvp, _ = Counter(scorers).most_common(1)[0]
-    return mvp
+    if score1 + score2 == 0:
+        mvp = random.choice([p for p in team1.players or team2.players])
+        return mvp
+    else:
+        scorers = [event.split()[0] for _, event in events if "scored" in event]
+        mvp, _ = Counter(scorers).most_common(1)[0]
+        return mvp
 
 
 

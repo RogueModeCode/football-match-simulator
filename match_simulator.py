@@ -22,11 +22,21 @@ def simulate_match(team1, team2):
             if random.random() < team1.team_strength() / (team1.team_strength() + team2.team_strength()):
                 scorer = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID"])
                 score1 += 1
-                events.append((round(second/60), f"{scorer.name} scored for {team1.name}"))
+                assister = random.choice([p for p in team1.players])
+                if assister == scorer:
+                    events.append((round(second/60), f"{scorer.name} scored for {team1.name}"))
+                else:
+                    events.append((round(second/60), f"{scorer.name} scored for {team1.name} and was assisted by {assister.name}"))
+
             else:
                 scorer = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID"])
                 score2 += 1
-                events.append((round(second/60), f"{scorer.name} scored for {team2.name}"))
+                assister = random.choice([p for p in team2.players])
+                if assister == scorer:
+                    events.append((round(second/60), f"{scorer.name} scored for {team2.name}"))
+                else:
+                    events.append((round(second/60), f"{scorer.name} scored for {team2.name} and was assisted by {assister.name}"))
+                    
 
         # card event    
         if random.random() < CARD_PER_MIN_PROB/60:

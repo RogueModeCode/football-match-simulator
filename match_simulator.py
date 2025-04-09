@@ -1,6 +1,5 @@
 import random
 from collections import Counter
-
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal
 
 SCORE_PER_MIN_PROB = 0.05
@@ -35,14 +34,14 @@ def simulate_match(team1, team2):
                 carded = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
             if carded in carded_players or random.random() < .05:
                 red_cards += 1
-                events.append((round(second/60), f"{carded.name} was given a red card"))
+                events.append((round(second/60), f"{carded.name} {carded.team} was given a red card"))
                 try:
                     team1.players.remove(carded)
                 except:    
                     team2.players.remove(carded)
             else:
                 yellow_cards += 1
-                events.append((round(second/60), f"{carded.name} was given a yellow card"))
+                events.append((round(second/60), f"{carded.name} {carded.team} was given a yellow card"))
                 carded_players.append(carded)
                 
                 
@@ -66,7 +65,7 @@ def simulate_scoring_event(attacking_team, defending_team, second, events, attac
 
         if random.random()*goalie.rating > random.random()*scorer.rating:
             #shot saved
-            events.append((round(second/60), f"{goalie.name} saved {scorer.name}'s shot"))
+            events.append((round(second/60), f"{goalie.name} {goalie.team} saved {scorer.name}'s {scorer.team} shot"))
         else: 
             #shot scored   
             attacking_team_score += 1
@@ -107,7 +106,7 @@ def find_mvp(events):
 if __name__ == "__main__":
 
     team1 = plymouth_argyle
-    team2 = chelsea
+    team2 = famalicao
     league_array = [plymouth_argyle, arsenal, chelsea, famalicao]
 
     for team in league_array:

@@ -1,6 +1,4 @@
 import random
-from player import Player
-from team import Team
 from collections import Counter
 
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal
@@ -18,6 +16,7 @@ def simulate_match(team1, team2):
     score2 = 0
     yellow_cards = 0
     red_cards = 0
+    carded_players = []
     events = []
 
     for second in range(1, 90 * 60):
@@ -30,13 +29,22 @@ def simulate_match(team1, team2):
         
         # card event    
         if random.random() < CARD_PER_MIN_PROB/60:
-            carded = random.choice([p for p in team1.players or team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
-            if random.random() < .95:
-                yellow_cards += 1
-                events.append((round(second/60), f"{carded.name} was given a yellow card"))
+            if random.random() < 0.50:
+                carded = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
             else:
+                carded = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+            if carded in carded_players or random.random() < .05:
                 red_cards += 1
                 events.append((round(second/60), f"{carded.name} was given a red card"))
+                try:
+                    team1.players.remove(carded)
+                except:    
+                    team2.players.remove(carded)
+            else:
+                yellow_cards += 1
+                events.append((round(second/60), f"{carded.name} was given a yellow card"))
+                carded_players.append(carded)
+                
                 
             
     return score1, score2, events

@@ -4,17 +4,17 @@ from team import Team
 # Logan's team
 plymouth_argyle = Team("Plymouth Argyle FC", "PAFC")
 plymouth_players = [
-    Player("Whittaker", "FWD", 74),
-    Player("Forshaw", "MID", 71),
-    Player("Mumba", "DEF", 71),
-    Player("Hardie", "FWD", 70),
-    Player("Pálsson", "DEF", 70),
-    Player("Tijani", "FWD", 70),
-    Player("Gibson", "DEF", 69),
-    Player("Hazard", "GK", 68),
-    Player("Randell", "Mid", 68),
-    Player("Pleguezuelo", "DEF", 68),
-    Player("Houghton", "MID", 67),
+    Player("Whittaker", "FWD", 74, plymouth_argyle),
+    Player("Forshaw", "MID", 71, plymouth_argyle),
+    Player("Mumba", "DEF", 71, plymouth_argyle),
+    Player("Hardie", "FWD", 70, plymouth_argyle),
+    Player("Pálsson", "DEF", 70, plymouth_argyle),
+    Player("Tijani", "FWD", 70, plymouth_argyle),
+    Player("Gibson", "DEF", 69, plymouth_argyle),
+    Player("Hazard", "GK", 68, plymouth_argyle),
+    Player("Randell", "Mid", 68, plymouth_argyle),
+    Player("Pleguezuelo", "DEF", 68, plymouth_argyle),
+    Player("Houghton", "MID", 67, plymouth_argyle),
 ]
 
 for player in plymouth_players:

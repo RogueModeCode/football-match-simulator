@@ -34,14 +34,14 @@ def simulate_match(team1, team2):
                 carded = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
             if carded in carded_players or random.random() < .05:
                 red_cards += 1
-                events.append((round(second/60), f"{carded.name} {carded.team} was given a red card"))
+                events.append((round(second/60), f"{carded.name} ({carded.team.abbr}) was given a red card"))
                 try:
                     team1.players.remove(carded)
                 except:    
                     team2.players.remove(carded)
             else:
                 yellow_cards += 1
-                events.append((round(second/60), f"{carded.name} {carded.team} was given a yellow card"))
+                events.append((round(second/60), f"{carded.name} ({carded.team.abbr}) was given a yellow card"))
                 carded_players.append(carded)      
             
     return score1, score2, events 

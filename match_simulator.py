@@ -46,7 +46,7 @@ def simulate_match(team1, team2):
                 
                 
             
-    return score1, score2, events
+    return score1, score2, events 
 
 
 def simulate_scoring_event(attacking_team, defending_team, second, events, attacking_team_score): 

@@ -5,8 +5,9 @@ POSITION_STRENGTH = { "GK": 1.2, "DEF": 1.0, "MID":1.1, "FWD": 1.2 }
 
 # --- Team Class ---
 class Team:
-    def __init__(self, name):
+    def __init__(self, name, abbr):
         self.name = name
+        self.abbr = abbr
         self.players = []
 
     def add_player(self, player):

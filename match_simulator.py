@@ -42,9 +42,7 @@ def simulate_match(team1, team2):
             else:
                 yellow_cards += 1
                 events.append((round(second/60), f"{carded.name} {carded.team} was given a yellow card"))
-                carded_players.append(carded)
-                
-                
+                carded_players.append(carded)      
             
     return score1, score2, events 
 
@@ -65,7 +63,7 @@ def simulate_scoring_event(attacking_team, defending_team, second, events, attac
 
         if random.random()*goalie.rating > random.random()*scorer.rating:
             #shot saved
-            events.append((round(second/60), f"{goalie.name} {goalie.team} saved {scorer.name}'s {scorer.team} shot"))
+            events.append((round(second/60), f"{goalie.name} ({defending_team.abbr}) saved {scorer.name}'s ({attacking_team.abbr}) shot"))
         else: 
             #shot scored   
             attacking_team_score += 1

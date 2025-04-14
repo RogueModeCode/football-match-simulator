@@ -15,6 +15,7 @@ plymouth_players = [
     Player("Randell", "Mid", 68, plymouth_argyle),
     Player("Pleguezuelo", "DEF", 68, plymouth_argyle),
     Player("Houghton", "MID", 67, plymouth_argyle),
+    Player("Edwards", "DEF", 67, plymouth_argyle)
 ]
 
 for player in plymouth_players:

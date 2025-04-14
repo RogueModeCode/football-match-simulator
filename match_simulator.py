@@ -4,10 +4,12 @@ from teams_database import plymouth_argyle, famalicao, chelsea, arsenal
 
 SCORE_PER_MIN_PROB = 0.05
 CARD_PER_MIN_PROB = 0.036
+SUB_PER_MIN_PROB = 0.036
 
 FORWARD_SCORING_PROB = 0.60
 MIDFIELD_SCORING_PROB = 0.30
 DEFENDER_SCORING_PROB = 0.099
+
 
 def simulate_match(team1, team2):
 
@@ -17,6 +19,7 @@ def simulate_match(team1, team2):
     red_cards = 0
     carded_players = []
     events = []
+
 
     for second in range(1, 90 * 60):
         # scoring event
@@ -39,7 +42,15 @@ def simulate_match(team1, team2):
             else:
                 yellow_cards += 1
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
-                carded_players.append(carded_player)      
+                carded_players.append(carded_player)
+
+        if second > 60 * 60:
+            if random.random() < SUB_PER_MIN_PROB/60:
+                if random.random() < 0.50:
+                    pass
+                # sub on sub one
+                # else
+                # sub on team two
             
     return score1, score2, events 
 

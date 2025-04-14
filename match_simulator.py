@@ -29,20 +29,17 @@ def simulate_match(team1, team2):
         # card event    
         if random.random() < CARD_PER_MIN_PROB/60:
             if random.random() < 0.50:
-                carded = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+                carded_player = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
             else:
-                carded = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
-            if carded in carded_players or random.random() < .05:
+                carded_player = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+            if carded_player in carded_players or random.random() < .05:
                 red_cards += 1
-                events.append((round(second/60), f"{carded.name} ({carded.team.abbr}) was given a red card"))
-                try:
-                    team1.players.remove(carded)
-                except:    
-                    team2.players.remove(carded)
+                events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
+                carded_player.team.remove(carded_player)
             else:
                 yellow_cards += 1
-                events.append((round(second/60), f"{carded.name} ({carded.team.abbr}) was given a yellow card"))
-                carded_players.append(carded)      
+                events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
+                carded_players.append(carded_player)      
             
     return score1, score2, events 
 

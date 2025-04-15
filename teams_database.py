@@ -12,14 +12,39 @@ plymouth_players = [
     Player("Tijani", "FWD", 70, plymouth_argyle),
     Player("Gibson", "DEF", 69, plymouth_argyle),
     Player("Hazard", "GK", 68, plymouth_argyle),
-    Player("Randell", "Mid", 68, plymouth_argyle),
+    Player("Randell", "MID", 68, plymouth_argyle),
     Player("Pleguezuelo", "DEF", 68, plymouth_argyle),
     Player("Houghton", "MID", 67, plymouth_argyle),
-    Player("Edwards", "DEF", 67, plymouth_argyle)
+    #subs
+    Player("Edwards", "DEF", 67, plymouth_argyle),
+    Player("Gyabi", "MID", 66, plymouth_argyle),
+    Player("Cissoko", "FWD", 69, plymouth_argyle),
 ]
 
 for player in plymouth_players:
     plymouth_argyle.add_player(player)
+
+liverpool = Team("Liverpool FC", "LFC")
+liverpool_players = [
+    Player("Alisson", "GK", 89, liverpool),
+    Player("van Dijk", "DEF", 89, liverpool),
+    Player("Salah", "FWD", 89, liverpool),
+    Player("Mac Allister", "MID", 86, liverpool),
+    Player("Alexander-Arnold", "DEF", 86, liverpool),
+    Player("Robertson", "DEF", 85, liverpool),
+    Player("Jota", "FWD", 85, liverpool),
+    Player("Chiesa", "FWD", 84, liverpool),
+    Player("Diaz", "FWD", 84, liverpool),
+    Player("Konaté", "DEF", 83, liverpool),
+    Player("Szoboszlai", "MID", 81, liverpool),
+    #subs
+    Player("Endo", "MID", 80, liverpool),
+    Player("Gakpo", "FWD", 83, liverpool),
+    Player("Gomex", "DEF", 80, liverpool),
+]
+
+for player in liverpool_players:
+    liverpool.add_player(player)
 
 #Cael's Team
 chelsea = Team("Chelsea FC", "CFC")

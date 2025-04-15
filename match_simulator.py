@@ -1,6 +1,6 @@
 import random
 from collections import Counter
-from teams_database import plymouth_argyle, famalicao, chelsea, arsenal
+from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool
 
 SCORE_PER_MIN_PROB = 0.05
 CARD_PER_MIN_PROB = 0.036
@@ -38,7 +38,7 @@ def simulate_match(team1, team2):
             if carded_player in carded_players or random.random() < .05:
                 red_cards += 1
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
-                carded_player.team.remove(carded_player)
+                carded_player.team.remove_player(carded_player)
             else:
                 yellow_cards += 1
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
@@ -112,8 +112,8 @@ def find_mvp(events):
 if __name__ == "__main__":
 
     team1 = plymouth_argyle
-    team2 = famalicao
-    league_array = [plymouth_argyle, arsenal, chelsea, famalicao]
+    team2 = liverpool
+    league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool]
 
     for team in league_array:
         if team == team1 or team == team2:

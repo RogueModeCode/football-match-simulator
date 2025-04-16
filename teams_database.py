@@ -78,6 +78,10 @@ arsenal_players = [
         Player("Saliba", "DEF", 87, arsenal),
         Player("Timber", "DEF", 84, arsenal),
         Player("Raya", "GK", 83, arsenal),
+        #subs
+        Player("Trossard", "FWD", 83, arsenal),
+        Player("Zinchenko", "MID", 79, arsenal),
+        Player("White", "DEF", 84, arsenal),
 ]
 for player in arsenal_players:
     arsenal.add_player(player)
@@ -99,3 +103,24 @@ famalicao_players = [
 ]
 for player in famalicao_players:
     famalicao.add_player(player)
+
+real_madrid = Team("Real Madrid FC", "RMA")
+real_madrid_players = [
+        Player("Mbappe", "FWD", 91, real_madrid),
+        Player("Vini Jr", "FWD", 90, real_madrid),
+        Player("Rodrygo", "FWD", 86, real_madrid),
+        Player("Bellingham", "MID", 90, real_madrid),
+        Player("Valverde", "MID", 88, real_madrid),
+        Player("Modric", "MID", 86, real_madrid),
+        Player("Mendy", "DEF", 84, real_madrid),
+        Player("Rudiger", "DEF", 88, real_madrid),
+        Player("Alaba", "DEF", 85, real_madrid),
+        Player("Carvajal", "DEF", 86, real_madrid),
+        Player("Courtois", "GK", 89, real_madrid),
+        #subs
+        Player("Camavinga", "MID", 83, real_madrid),
+        Player("Tchouameni", "DEF", 85, real_madrid),
+        Player("Endrick", "FWD", 77, real_madrid),
+]
+for player in real_madrid_players:
+    real_madrid.add_player(player)

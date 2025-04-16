@@ -1,6 +1,6 @@
 import random
 from collections import Counter
-from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool
+from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid
 
 SCORE_PER_MIN_PROB = 0.05
 CARD_PER_MIN_PROB = 0.036
@@ -111,8 +111,8 @@ def find_mvp(events):
 # --- Example Usage ---
 if __name__ == "__main__":
 
-    team1 = plymouth_argyle
-    team2 = liverpool
+    team1 = arsenal
+    team2 = real_madrid
     league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool]
 
     for team in league_array:

@@ -86,24 +86,6 @@ arsenal_players = [
 for player in arsenal_players:
     arsenal.add_player(player)
 
-#Levis Team
-famalicao = Team("FC Famalicao", "FAM")
-famalicao_players = [
-        Player("Youssouf", "FWD", 76, famalicao),
-        Player("Rochinha", "FWD", 74, famalicao),
-        Player("Gonzalez", "FWD", 71, famalicao),
-        Player("Sa", "MID", 72, famalicao),
-        Player("Topic", "MID", 70, famalicao),
-        Player("Aranda", "MID", 68, famalicao),
-        Player("de Haas", "DEF", 69, famalicao),
-        Player("Soares", "DEF", 70, famalicao),
-        Player("Mihaj", "DEF", 70, famalicao),
-        Player("Riccieli", "DEF", 72, famalicao),
-        Player("Zlobin", "GK", 67, famalicao),
-]
-for player in famalicao_players:
-    famalicao.add_player(player)
-
 real_madrid = Team("Real Madrid FC", "RMA")
 real_madrid_players = [
         Player("Mbappe", "FWD", 91, real_madrid),
@@ -124,3 +106,22 @@ real_madrid_players = [
 ]
 for player in real_madrid_players:
     real_madrid.add_player(player)
+
+#Levis Team
+famalicao = Team("FC Famalicao", "FAM")
+famalicao_players = [
+        Player("Youssouf", "FWD", 76, famalicao),
+        Player("Rochinha", "FWD", 74, famalicao),
+        Player("Gonzalez", "FWD", 71, famalicao),
+        Player("Sa", "MID", 72, famalicao),
+        Player("Topic", "MID", 70, famalicao),
+        Player("Aranda", "MID", 68, famalicao),
+        Player("de Haas", "DEF", 69, famalicao),
+        Player("Soares", "DEF", 70, famalicao),
+        Player("Mihaj", "DEF", 70, famalicao),
+        Player("Riccieli", "DEF", 72, famalicao),
+        Player("Zlobin", "GK", 67, famalicao),
+]
+for player in famalicao_players:
+    famalicao.add_player(player)
+

@@ -1,5 +1,7 @@
 import random
 from collections import Counter
+import math
+import numpy as np
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid
 
 SCORE_PER_MIN_PROB = 0.05
@@ -24,25 +26,25 @@ def simulate_match(team1, team2):
     for second in range(1, 90 * 60):
         # scoring event
         if random.random() < SCORE_PER_MIN_PROB/60:
-            if random.random() < team1.team_strength() / (team1.team_strength() + team2.team_strength()):
+            if random.random() < team1.team_strength()*100 / (team1.team_strength()*100 + team2.team_strength()*100):
                 score1 = simulate_scoring_event(team1, team2, second, events, score1)
             else:
                 score2 = simulate_scoring_event(team2, team1, second, events, score2)
         
         # card event    
-        if random.random() < CARD_PER_MIN_PROB/60:
-            if random.random() < 0.50:
-                carded_player = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
-            else:
-                carded_player = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
-            if carded_player in carded_players or random.random() < .05:
-                red_cards += 1
-                events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
-                carded_player.team.remove_player(carded_player)
-            else:
-                yellow_cards += 1
-                events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
-                carded_players.append(carded_player)
+        # if random.random() < CARD_PER_MIN_PROB/60:
+        #     if random.random() < 0.50:
+        #         carded_player = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+        #     else:
+        #         carded_player = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+        #     if carded_player in carded_players or random.random() < .05:
+        #         red_cards += 1
+        #         events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
+        #         carded_player.team.remove_player(carded_player)
+        #     else:
+        #         yellow_cards += 1
+        #         events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
+        #         carded_players.append(carded_player)
 
         if second > 60 * 60:
             if random.random() < SUB_PER_MIN_PROB/60:
@@ -111,15 +113,26 @@ def find_mvp(events):
 # --- Example Usage ---
 if __name__ == "__main__":
 
-    team1 = arsenal
-    team2 = real_madrid
+    team1 = real_madrid
+    team2 = plymouth_argyle
     league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool]
 
-    for team in league_array:
-        if team == team1 or team == team2:
-            team.display_team()
-            print(team.display_team)
+    # for team in league_array:
+    #     if team == team1 or team == team2:
+    #         team.display_team()
+    #         print(team.display_team)
 
     # Simulate match
-    score1, score2, events = simulate_match(team1, team2)
-    generate_match_report(team1, team2, score1, score2, events)
+    team1_score_average = 0
+    team2_score_average = 0
+    actual_team1_score = 6
+    actual_team2_score = 0
+    for game in range(1, 101):
+        score1, score2, events = simulate_match(team1, team2)
+        # generate_match_report(team1, team2, score1, score2, events)
+        team1_score_average += score1
+        team2_score_average += score2
+    team1_score_average /= 100
+    team2_score_average /= 100
+    score_error = math.sqrt(np.square(team1_score_average - actual_team1_score)) + math.sqrt(np.square(team2_score_average - actual_team2_score))
+    print(f"{team1.name} Average Score: {team1_score_average}, {team2.name} Average Score: {team2_score_average}. Score Error: {score_error}")

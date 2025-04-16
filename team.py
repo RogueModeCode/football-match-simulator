@@ -33,7 +33,6 @@ class Team:
         total = 0
         for player in self.players:
             total += player.rating * POSITION_STRENGTH[player.position.upper()] 
-        
         return total
     
     def random_player_by_position(self, position):

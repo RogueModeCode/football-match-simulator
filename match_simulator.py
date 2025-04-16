@@ -4,7 +4,7 @@ import math
 import numpy as np
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid
 
-SCORE_PER_MIN_PROB = 0.05
+SCORE_PER_MIN_PROB = 0.2
 CARD_PER_MIN_PROB = 0.036
 SUB_PER_MIN_PROB = 0.036
 
@@ -26,8 +26,8 @@ def simulate_match(team1, team2):
 
     for second in range(1, 90 * 60):
         # scoring event
-        if random.random() < SCORE_PER_MIN_PROB/60:
-            if random.random() < team1.team_strength()*100 / (team1.team_strength()*100 + team2.team_strength()*100):
+        if random.random() < SCORE_PER_MIN_PROB/60 * team1.team_strength() / (team1.team_strength() + team2.team_strength()):
+            if random.random() < team1.team_strength()/team2.team_strength()*(team1.team_strength() / (team1.team_strength() + team2.team_strength())):
                 score1 = simulate_scoring_event(team1, team2, second, events, score1)
             else:
                 score2 = simulate_scoring_event(team2, team1, second, events, score2)
@@ -116,9 +116,8 @@ def find_mvp(events):
 
 # --- Example Usage ---
 if __name__ == "__main__":
-
     team1 = arsenal
-    team2 = real_madrid
+    team2 = chelsea
     league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool, real_madrid]
 
     # for team in league_array:
@@ -129,10 +128,10 @@ if __name__ == "__main__":
     # Simulate match
     team1_score_average = 0
     team2_score_average = 0
-    actual_team1_score = 6
+    actual_team1_score = 1
     actual_team2_score = 0
     for game in range(1, 101):
-        score1, score2, events = simulate_match(team1, team2)
+        score1, score2, events, red_carded_players= simulate_match(team1, team2)
         # generate_match_report(team1, team2, score1, score2, events)
         for player in red_carded_players:
             player.team.players.append(player)

@@ -19,6 +19,7 @@ def simulate_match(team1, team2):
     score2 = 0
     yellow_cards = 0
     red_cards = 0
+    red_carded_players = []
     carded_players = []
     events = []
 
@@ -32,19 +33,20 @@ def simulate_match(team1, team2):
                 score2 = simulate_scoring_event(team2, team1, second, events, score2)
         
         # card event    
-        # if random.random() < CARD_PER_MIN_PROB/60:
-        #     if random.random() < 0.50:
-        #         carded_player = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
-        #     else:
-        #         carded_player = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
-        #     if carded_player in carded_players or random.random() < .05:
-        #         red_cards += 1
-        #         events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
-        #         carded_player.team.remove_player(carded_player)
-        #     else:
-        #         yellow_cards += 1
-        #         events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
-        #         carded_players.append(carded_player)
+        if random.random() < CARD_PER_MIN_PROB/60:
+            if random.random() < 0.50:
+                carded_player = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+            else:
+                carded_player = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+            if carded_player in carded_players or random.random() < .05:
+                red_cards += 1
+                events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
+                carded_player.team.remove_player(carded_player)
+                red_carded_players.append(carded_player)
+            else:
+                yellow_cards += 1
+                events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
+                carded_players.append(carded_player)
 
         if second > 60 * 60:
             if random.random() < SUB_PER_MIN_PROB/60:
@@ -54,7 +56,7 @@ def simulate_match(team1, team2):
                 # else
                 # sub on team two
             
-    return score1, score2, events 
+    return score1, score2, events, red_carded_players 
 
 
 def simulate_scoring_event(attacking_team, defending_team, second, events, attacking_team_score): 
@@ -107,15 +109,17 @@ def find_mvp(events):
         scorers = [event.split()[0] for _, event in events if "scored" in event]
         mvp, _ = Counter(scorers).most_common(1)[0]
         return mvp
+    
+
 
 
 
 # --- Example Usage ---
 if __name__ == "__main__":
 
-    team1 = real_madrid
-    team2 = plymouth_argyle
-    league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool]
+    team1 = arsenal
+    team2 = real_madrid
+    league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool, real_madrid]
 
     # for team in league_array:
     #     if team == team1 or team == team2:
@@ -130,6 +134,8 @@ if __name__ == "__main__":
     for game in range(1, 101):
         score1, score2, events = simulate_match(team1, team2)
         # generate_match_report(team1, team2, score1, score2, events)
+        for player in red_carded_players:
+            player.team.players.append(player)
         team1_score_average += score1
         team2_score_average += score2
     team1_score_average /= 100

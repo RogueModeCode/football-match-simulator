@@ -1,7 +1,8 @@
 import random
-from collections import Counter
 import math
+from collections import Counter
 import numpy as np
+
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid
 
 SCORE_PER_MIN_PROB = 0.2

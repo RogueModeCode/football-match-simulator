@@ -124,3 +124,24 @@ real_madrid_players = [
 ]
 for player in real_madrid_players:
     real_madrid.add_player(player)
+
+    barcelona = Team("Barcelona", "BAR")
+    barcelona_players = [
+        Player("Lewandowski", "FWD", 88, barcelona),
+        Player("Raphinha", "FWD", 84, barcelona),
+        Player("Yamal", "FWD", 86, barcelona),
+        Player("De Jong", "MID", 88, barcelona),
+        Player("Pedri", "MID", 86, barcelona),
+        Player("Dani Olmo", "MID", 84, barcelona),
+        Player("Araujo", "DEF", 85, barcelona),
+        Player("Kounde", "DEF", 85, barcelona),
+        Player("Christensen", "DEF", 83, barcelona),
+        Player("Balde", "DEF", 81, barcelona),
+        Player("Ter Stegen", "GK", 89, barcelona),
+        #subs
+        Player("Ferran Torres", "FWD", 80, barcelona),
+        Player("Martinez", "DEF", 81, barcelona),
+        Player("Gavi", "MID", 83, barcelona)
+    ]
+for player in barcelona_players:
+    barcelona.add_player(player)

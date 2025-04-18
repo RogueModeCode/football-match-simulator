@@ -2,8 +2,11 @@ import random
 import math
 from collections import Counter
 import numpy as np
+import copy
 
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid
+#from teams_database import *
+#import teams_database
 
 SCORE_PER_MIN_PROB = 0.2
 CARD_PER_MIN_PROB = 0.036
@@ -20,7 +23,6 @@ def simulate_match(team1, team2):
     score2 = 0
     yellow_cards = 0
     red_cards = 0
-    red_carded_players = []
     carded_players = []
     events = []
 
@@ -43,7 +45,6 @@ def simulate_match(team1, team2):
                 red_cards += 1
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
                 carded_player.team.remove_player(carded_player)
-                red_carded_players.append(carded_player)
             else:
                 yellow_cards += 1
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
@@ -57,7 +58,7 @@ def simulate_match(team1, team2):
                 # else
                 # sub on team two
             
-    return score1, score2, events, red_carded_players 
+    return score1, score2, events
 
 
 def simulate_scoring_event(attacking_team, defending_team, second, events, attacking_team_score): 
@@ -71,6 +72,9 @@ def simulate_scoring_event(attacking_team, defending_team, second, events, attac
             scorer = attacking_team.random_player_by_position("DEF")
         else:
             scorer = attacking_team.random_player_by_position("GK")
+
+        if scorer == None:
+            return attacking_team_score
 
         goalie = defending_team.random_player_by_position("GK")
 
@@ -131,14 +135,26 @@ if __name__ == "__main__":
     team2_score_average = 0
     actual_team1_score = 1
     actual_team2_score = 0
-    for game in range(1, 101):
-        score1, score2, events, red_carded_players= simulate_match(team1, team2)
+    team1_sse = 0
+    team2_sse = 0
+    
+    NUM_GAMES = 100
+
+    for game in range(NUM_GAMES):
+        team1_copy = copy.deepcopy(team1)
+        team2_copy = copy.deepcopy(team2)
+
+        score1, score2, events = simulate_match(team1_copy, team2_copy)
         # generate_match_report(team1, team2, score1, score2, events)
-        for player in red_carded_players:
-            player.team.players.append(player)
+  
         team1_score_average += score1
         team2_score_average += score2
-    team1_score_average /= 100
-    team2_score_average /= 100
-    score_error = math.sqrt(np.square(team1_score_average - actual_team1_score)) + math.sqrt(np.square(team2_score_average - actual_team2_score))
-    print(f"{team1.name} Average Score: {team1_score_average}, {team2.name} Average Score: {team2_score_average}. Score Error: {score_error}")
+
+        team1_sse += (score1 - actual_team1_score) ** 2
+        team2_sse += (score2 - actual_team2_score) ** 2
+    team1_score_average /= NUM_GAMES
+    team2_score_average /= NUM_GAMES
+    team1_mse = team1_sse / NUM_GAMES
+    team2_mse = team2_sse / NUM_GAMES
+
+    print(f"{team1_copy.name} Average Score: {team1_score_average} MSE: {team1_mse}, {team2_copy.name} Average Score: {team2_score_average} MSE: {team2_mse}" )

@@ -36,6 +36,9 @@ class Team:
         return total
     
     def random_player_by_position(self, position):
+        if len([p for p in self.players if p.position == position]) == 0:
+            return None
+        
         random_player = random.choice([p for p in self.players if p.position == position])
         return random_player
 

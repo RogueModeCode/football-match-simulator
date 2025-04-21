@@ -1,6 +1,7 @@
 import random
 from collections import Counter
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid
+from game import Game, GameResult, season
 
 SCORE_PER_MIN_PROB = 0.05
 CARD_PER_MIN_PROB = 0.036
@@ -111,15 +112,45 @@ def find_mvp(events):
 # --- Example Usage ---
 if __name__ == "__main__":
 
-    team1 = arsenal
-    team2 = real_madrid
-    league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool]
+    # team1 = arsenal
+    # team2 = real_madrid
+    # league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool]
 
-    for team in league_array:
-        if team == team1 or team == team2:
-            team.display_team()
-            print(team.display_team)
+    # for team in league_array:
+    #     if team == team1 or team == team2:
+    #         team.display_team()
+    #         print(team.display_team)
 
-    # Simulate match
-    score1, score2, events = simulate_match(team1, team2)
-    generate_match_report(team1, team2, score1, score2, events)
+    # # Simulate match
+    # score1, score2, events = simulate_match(team1, team2)
+    # generate_match_report(team1, team2, score1, score2, events)
+
+    number_of_game_results_correct = 0
+
+    for actual_game in season:
+        print(f"\nActual Result:")
+        print(f"{actual_game.home_team.name} vs {actual_game.away_team.name}: {actual_game.score[actual_game.home_team]} - {actual_game.score[actual_game.away_team]}")
+        print(f"{actual_game.result()}")
+
+        # Simulate match
+        predited_game = simulate_match(actual_game.home_team, actual_game.away_team)
+
+        print(f"\Predicted Result:")
+        print(f"{predited_game.home_team.name} vs {predited_game.away_team.name}: {predited_game.score[predited_game.home_team]} - {predited_game.score[predited_game.away_team]}")
+        print(f"{predited_game.result()}")
+
+        sse_home = (predited_game.score[actual_game.home_team] - actual_game.score[actual_game.home_team])**2
+        sse_away = (predited_game.score[actual_game.away_team] - actual_game.score[actual_game.away_team])**2
+        print(f"SSE Home: {sse_home}")
+        print(f"SSE Away: {sse_away}")
+        print(f"SSE Total: {sse_home + sse_away}")
+        print(f"-----------------------------------")
+        # print(f"Predicted Result: {predicted_result}")
+        # print(f"Actual Result: {actual_game.result()}")
+        # print(f"Score: {predicted_score} - {actual_game.score}")
+        if predited_game.result() == actual_game.result():
+            number_of_game_results_correct += 1
+
+    print(f"Number of game results correct: {number_of_game_results_correct} out of {len(season)}")
+    print(f"Percentage of game results correct: {number_of_game_results_correct/len(season)*100}%")
+    

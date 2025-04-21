@@ -23,8 +23,25 @@ class Game:
         self.score = {home_team: home_score, away_team: away_score}
         self.month = month
         self.day = day
+
     def result(self) -> GameResult:
-        return ""
+        if self.score[self.home_team] == self.score[self.away_team]:
+            return GameResult.DRAW
+        elif self.score[self.home_team] < self.score[self.away_team]:
+            return GameResult.AWAY_WIN
+        else:
+            return GameResult.HOME_WIN 
 
 
-arsenal_vs_chelsea_316 = Game(arsenal, chelsea, 1,0, 3,16)
+season = [ 
+            Game(arsenal, chelsea, 1,0, 3,16),
+            Game(arsenal, famalicao, 2,0, 3,23),
+            Game(arsenal, liverpool, 1,1, 3,30),
+            Game(arsenal, real_madrid, 2,1, 4,6),
+            Game(arsenal, plymouth_argyle, 3,0, 4,13),
+            Game(arsenal, famalicao, 2,0, 4,20),
+            Game(arsenal, chelsea, 1,0, 4,27),
+            Game(arsenal, liverpool, 1,1 ,5 ,4),
+            Game(arsenal, real_madrid ,2 ,1 ,5 ,11),
+            Game(arsenal, plymouth_argyle, 3, 0, 5, 18)
+        ]

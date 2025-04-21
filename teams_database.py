@@ -64,6 +64,29 @@ chelsea_players = [
 for player in  chelsea_players:
     chelsea.add_player(player)
 
+    barcelona = Team("Barcelona", "BAR")
+    barcelona_players = [
+        Player("Lewandowski", "FWD", 88, barcelona),
+        Player("Raphinha", "FWD", 84, barcelona),
+        Player("Yamal", "FWD", 86, barcelona),
+        Player("De Jong", "MID", 88, barcelona),
+        Player("Pedri", "MID", 86, barcelona),
+        Player("Dani Olmo", "MID", 84, barcelona),
+        Player("Araujo", "DEF", 85, barcelona),
+        Player("Kounde", "DEF", 85, barcelona),
+        Player("Christensen", "DEF", 83, barcelona),
+        Player("Balde", "DEF", 81, barcelona),
+        Player("Ter Stegen", "GK", 89, barcelona),
+        #subs
+        Player("Ferran Torres", "FWD", 80, barcelona),
+        Player("Martinez", "DEF", 81, barcelona),
+        Player("Gavi", "MID", 83, barcelona)
+    ]
+for player in barcelona_players:
+    barcelona.add_player(player)
+
+
+
  #Jonahs Team
 arsenal = Team("Arsenal FC", "AFC")
 arsenal_players = [
@@ -86,23 +109,26 @@ arsenal_players = [
 for player in arsenal_players:
     arsenal.add_player(player)
 
-#Levis Team
-famalicao = Team("FC Famalicao", "FAM")
-famalicao_players = [
-        Player("Youssouf", "FWD", 76, famalicao),
-        Player("Rochinha", "FWD", 74, famalicao),
-        Player("Gonzalez", "FWD", 71, famalicao),
-        Player("Sa", "MID", 72, famalicao),
-        Player("Topic", "MID", 70, famalicao),
-        Player("Aranda", "MID", 68, famalicao),
-        Player("de Haas", "DEF", 69, famalicao),
-        Player("Soares", "DEF", 70, famalicao),
-        Player("Mihaj", "DEF", 70, famalicao),
-        Player("Riccieli", "DEF", 72, famalicao),
-        Player("Zlobin", "GK", 67, famalicao),
+ipswich = Team("Ipswich Town", "IFC")
+ipswich_players = [
+        Player("Delap", "FWD", 71, ipswich),
+        Player("Clarke", "FWD", 75, ipswich),
+        Player("Hutchinson", "FWD", 74, ipswich),
+        Player("Phillips", "MID", 77, ipswich),
+        Player("Chaplin", "MID", 75, ipswich),
+        Player("Morsey", "MID", 76, ipswich),
+        Player("Davis", "DEF", 76, ipswich),
+        Player("Greaves", "DEF", 75, ipswich),
+        Player("O'Shea", "DEF", 74, ipswich),
+        Player("Johnson", "DEF", 73, ipswich),
+        Player("Muric", "GK", 75, ipswich),
+        #subs
+        Player("Szmodics", "MID", 75, ipswich),
+        Player("Ogbene", "DEF", 73, ipswich),
+        Player("Broadhead", "FWD", 72, ipswich),
 ]
-for player in famalicao_players:
-    famalicao.add_player(player)
+for player in ipswich_players:
+    ipswich.add_player(player)
 
 real_madrid = Team("Real Madrid FC", "RMA")
 real_madrid_players = [
@@ -125,44 +151,22 @@ real_madrid_players = [
 for player in real_madrid_players:
     real_madrid.add_player(player)
 
-    barcelona = Team("Barcelona", "BAR")
-    barcelona_players = [
-        Player("Lewandowski", "FWD", 88, barcelona),
-        Player("Raphinha", "FWD", 84, barcelona),
-        Player("Yamal", "FWD", 86, barcelona),
-        Player("De Jong", "MID", 88, barcelona),
-        Player("Pedri", "MID", 86, barcelona),
-        Player("Dani Olmo", "MID", 84, barcelona),
-        Player("Araujo", "DEF", 85, barcelona),
-        Player("Kounde", "DEF", 85, barcelona),
-        Player("Christensen", "DEF", 83, barcelona),
-        Player("Balde", "DEF", 81, barcelona),
-        Player("Ter Stegen", "GK", 89, barcelona),
-        #subs
-        Player("Ferran Torres", "FWD", 80, barcelona),
-        Player("Martinez", "DEF", 81, barcelona),
-        Player("Gavi", "MID", 83, barcelona)
-    ]
-for player in barcelona_players:
-    barcelona.add_player(player)
 
-ipswich = Team("Ipswich Town", "IFC")
-ipswich_players = [
-        Player("Delap", "FWD", 71, ipswich),
-        Player("Clarke", "FWD", 75, ipswich),
-        Player("Hutchinson", "FWD", 74, ipswich),
-        Player("Phillips", "MID", 77, ipswich),
-        Player("Chaplin", "MID", 75, ipswich),
-        Player("Morsey", "MID", 76, ipswich),
-        Player("Davis", "DEF", 76, ipswich),
-        Player("Greaves", "DEF", 75, ipswich),
-        Player("O'Shea", "DEF", 74, ipswich),
-        Player("Johnson", "DEF", 73, ipswich),
-        Player("Muric", "GK", 75, ipswich),
-        #subs
-        Player("Szmodics", "MID", 75, ipswich),
-        Player("Ogbene", "DEF", 73, ipswich),
-        Player("Broadhead", "FWD", 72, ipswich),
+#Levis Team
+famalicao = Team("FC Famalicao", "FAM")
+famalicao_players = [
+        Player("Youssouf", "FWD", 76, famalicao),
+        Player("Rochinha", "FWD", 74, famalicao),
+        Player("Gonzalez", "FWD", 71, famalicao),
+        Player("Sa", "MID", 72, famalicao),
+        Player("Topic", "MID", 70, famalicao),
+        Player("Aranda", "MID", 68, famalicao),
+        Player("de Haas", "DEF", 69, famalicao),
+        Player("Soares", "DEF", 70, famalicao),
+        Player("Mihaj", "DEF", 70, famalicao),
+        Player("Riccieli", "DEF", 72, famalicao),
+        Player("Zlobin", "GK", 67, famalicao),
 ]
-for player in ipswich_players:
-    ipswich.add_player(player)
+for player in famalicao_players:
+    famalicao.add_player(player)
+

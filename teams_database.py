@@ -125,3 +125,23 @@ famalicao_players = [
 for player in famalicao_players:
     famalicao.add_player(player)
 
+ipswich = Team("Ipswich Town", "IFC")
+ipswich_players = [
+        Player("Delap", "FWD", 71, ipswich),
+        Player("Clarke", "FWD", 75, ipswich),
+        Player("Hutchinson", "FWD", 74, ipswich),
+        Player("Phillips", "MID", 77, ipswich),
+        Player("Chaplin", "MID", 75, ipswich),
+        Player("Morsey", "MID", 76, ipswich),
+        Player("Davis", "DEF", 76, ipswich),
+        Player("Greaves", "DEF", 75, ipswich),
+        Player("O'Shea", "DEF", 74, ipswich),
+        Player("Johnson", "DEF", 73, ipswich),
+        Player("Muric", "GK", 75, ipswich),
+        #subs
+        Player("Szmodics", "MID", 75, ipswich),
+        Player("Ogbene", "DEF", 73, ipswich),
+        Player("Broadhead", "FWD", 72, ipswich),
+]
+for player in ipswich_players:
+    ipswich.add_player(player)

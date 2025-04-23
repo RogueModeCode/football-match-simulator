@@ -1,6 +1,6 @@
 import random
 from collections import Counter
-from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid
+from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid, man_city, man_utd, tottenham, newcastle, nottingham_forest, aston_villa, bournemouth, fulham, brighton, brentford, crystal_palace, everton, wolves, west_ham, leicester_city, southampton
 from game import Game, GameResult, season
 
 SCORE_PER_MIN_PROB = 0.05
@@ -52,9 +52,9 @@ def simulate_match(team1, team2):
                 # sub on sub one
                 # else
                 # sub on team two
-            
-    return score1, score2, events 
-
+        
+    game = Game(team1, team2, score1, score2, events, 0,00) 
+    return game
 
 def simulate_scoring_event(attacking_team, defending_team, second, events, attacking_team_score): 
 
@@ -85,25 +85,25 @@ def simulate_scoring_event(attacking_team, defending_team, second, events, attac
         
         return attacking_team_score
 
-def generate_match_report(team1, team2, score1, score2, events):
-    print(f"\n🏁 Final Score: {team1.name} {score1} - {score2} {team2.name}")
+def generate_match_report(game):
+    print(f"\n🏁 Final Score: {game.team1.name} {game.score1} - {game.score2} {game.team2.name}")
     print("📜 Match Events:")
-    for minute, event in events:
+    for minute, event in game.events:
         print(f"  {minute}' - {event}")
 
-    if events:
-        mvp = find_mvp(events)
+    if game.events:
+        mvp = find_mvp(game.events)
         print(f"\n🌟 Man of the Match: {mvp}")
     else:
         print("\nNo goals were scored.")
 
 
-def find_mvp(events):
-    if score1 + score2 == 0:
-        mvp = random.choice([p for p in team1.players or team2.players])
+def find_mvp(game):
+    if game.score1 + game.score2 == 0:
+        mvp = random.choice([p for p in game.team1.players or game.team2.players])
         return mvp
     else:
-        scorers = [event.split()[0] for _, event in events if "scored" in event]
+        scorers = [event.split()[0] for _, event in game.events if "scored" in event]
         mvp, _ = Counter(scorers).most_common(1)[0]
         return mvp
 
@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
     # team1 = arsenal
     # team2 = real_madrid
-    # league_array = [plymouth_argyle, arsenal, chelsea, famalicao, liverpool]
+    # league_array = [plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid, man_city, man_utd, tottenham, newcastle, nottingham_forest, aston_villa, bournemouth, fulham, brighton, brentford, crystal_palace, everton, wolves, west_ham, leicester_city, southampton]
 
     # for team in league_array:
     #     if team == team1 or team == team2:
@@ -122,8 +122,8 @@ if __name__ == "__main__":
     #         print(team.display_team)
 
     # # Simulate match
-    # score1, score2, events = simulate_match(team1, team2)
-    # generate_match_report(team1, team2, score1, score2, events)
+    # current_game = simulate_match(team1, team2)
+    # generate_match_report(current_game)
 
     number_of_game_results_correct = 0
 
@@ -135,7 +135,7 @@ if __name__ == "__main__":
         # Simulate match
         predited_game = simulate_match(actual_game.home_team, actual_game.away_team)
 
-        print(f"\Predicted Result:")
+        print(f"Predicted Result:")
         print(f"{predited_game.home_team.name} vs {predited_game.away_team.name}: {predited_game.score[predited_game.home_team]} - {predited_game.score[predited_game.away_team]}")
         print(f"{predited_game.result()}")
 

@@ -17,10 +17,11 @@ class GameResult(Enum):
             return "Draw"
 
 class Game:
-    def __init__(self, home_team:Team, away_team:Team, home_score:int=0, away_score:int=0, month:int=0, day:int=0):
+    def __init__(self, home_team:Team, away_team:Team, home_score:int=0, away_score:int=0, events:str="", month:int=0, day:int=0):
         self.home_team = home_team
         self.away_team = away_team
         self.score = {home_team: home_score, away_team: away_score}
+        self.events = events
         self.month = month
         self.day = day
 
@@ -41,7 +42,7 @@ season = [
             Game(arsenal, plymouth_argyle, 3,0, 4,13),
             Game(arsenal, famalicao, 2,0, 4,20),
             Game(arsenal, chelsea, 1,0, 4,27),
-            Game(arsenal, liverpool, 1,1 ,5 ,4),
-            Game(arsenal, real_madrid ,2 ,1 ,5 ,11),
-            Game(arsenal, plymouth_argyle, 3, 0, 5, 18)
+            Game(arsenal, liverpool, 1,1, 5,4),
+            Game(arsenal, real_madrid, 2,1, 5,11),
+            Game(arsenal, plymouth_argyle, 3,0, 5,18)
         ]

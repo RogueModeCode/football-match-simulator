@@ -2,7 +2,8 @@ import random
 import copy
 from collections import Counter
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid, manchester_city, manchester_united, tottenham, newcastle, nottingham_forest, aston_villa, bournemouth, fulham, brighton, brentford, crystal_palace, everton, wolverhampton, west_ham, leichester, southampton
-from game import Game, GameResult, season
+from game import Game, GameResult
+from games_database import season2024_25
 
 SCORE_PER_MIN_PROB = 0.05
 CARD_PER_MIN_PROB = 0.036
@@ -13,7 +14,7 @@ MIDFIELD_SCORING_PROB = 0.30
 DEFENDER_SCORING_PROB = 0.099
 
 
-def simulate_match(team1, team2):
+def simulate_match(home_team, away_team):
 
     score1 = 0
     score2 = 0
@@ -25,17 +26,17 @@ def simulate_match(team1, team2):
     for second in range(1, 90 * 60):
         # scoring event
         if random.random() < SCORE_PER_MIN_PROB/60:
-            if random.random() < team1.team_strength() / (team1.team_strength() + team2.team_strength()):
-                score1 = simulate_scoring_event(team1, team2, second, events, score1)
+            if random.random() < home_team.team_strength() / (home_team.team_strength() + away_team.team_strength()):
+                score1 = simulate_scoring_event(home_team, away_team, second, events, score1)
             else:
-                score2 = simulate_scoring_event(team2, team1, second, events, score2)
+                score2 = simulate_scoring_event(away_team, home_team, second, events, score2)
         
         # card event    
         if random.random() < CARD_PER_MIN_PROB/60:
             if random.random() < 0.50:
-                carded_player = random.choice([p for p in team1.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+                carded_player = random.choice([p for p in home_team.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
             else:
-                carded_player = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
+                carded_player = random.choice([p for p in away_team.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
             if carded_player in carded_players or random.random() < .05:
                 carded_player.team.red_cards += 1
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
@@ -45,13 +46,13 @@ def simulate_match(team1, team2):
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
                 carded_players.append(carded_player)
         # forfeit  
-        if team1.red_cards == 5:
-            events.append((round(second/60), f"{team2.name} forfeit due to recieving five red cards"))
-            game = Game(team1, team2, score1, score2, events, 0,00) 
+        if home_team.red_cards == 5:
+            events.append((round(second/60), f"{away_team.name} forfeit due to recieving five red cards"))
+            game = Game(home_team, away_team, score1, score2, events, 0,00) 
             return game
-        if team2.red_cards == 5:
-            events.append((round(second/60), f"{team2.name} forfeit due to recieving five red cards"))
-            game = Game(team1, team2, score1, score2, events, 0,00) 
+        if away_team.red_cards == 5:
+            events.append((round(second/60), f"{away_team.name} forfeit due to recieving five red cards"))
+            game = Game(home_team, away_team, score1, score2, events, 0,00) 
             return game
 
         if second > 60 * 60:
@@ -62,7 +63,7 @@ def simulate_match(team1, team2):
                 # else
                 # sub on team two
         
-    game = Game(team1, team2, score1, score2, events, 0,00) 
+    game = Game(home_team, away_team, score1, score2, events, 0,00) 
     return game
 
 def simulate_scoring_event(attacking_team, defending_team, second, events, attacking_team_score): 
@@ -136,11 +137,19 @@ if __name__ == "__main__":
     # generate_match_report(current_game)
 
     number_of_game_results_correct = 0
+    number_of_home_wins = 0
+    number_of_home_wins_correct = 0
 
-    for actual_game in season:
+    number_of_away_wins = 0
+    number_of_away_wins_correct = 0
+    
+    number_of_draws = 0
+    number_of_draws_correct = 0
+
+    for actual_game in season2024_25:
         
         print(f"\nActual Result:")
-        print(f"{actual_game.home_team.name} vs {actual_game.away_team.name}: {actual_game.score[actual_game.home_team]} - {actual_game.score[actual_game.away_team]}")
+        print(f"{actual_game.home_team.name} vs {actual_game.away_team.name}: {actual_game.score[actual_game.home_team.abbr]} - {actual_game.score[actual_game.away_team.abbr]}")
         print(f"{actual_game.result()}")
 
         home_team_copy = copy.deepcopy(actual_game.home_team)
@@ -150,11 +159,11 @@ if __name__ == "__main__":
         predited_game = simulate_match(home_team_copy, away_team_copy)
 
         print(f"Predicted Result:")
-        print(f"{predited_game.home_team.name} vs {predited_game.away_team.name}: {predited_game.score[predited_game.home_team]} - {predited_game.score[predited_game.away_team]}")
+        print(f"{predited_game.home_team.name} vs {predited_game.away_team.name}: {predited_game.score[predited_game.home_team.abbr]} - {predited_game.score[predited_game.away_team.abbr]}")
         print(f"{predited_game.result()}")
 
-        sse_home = (predited_game.score[actual_game.home_team] - actual_game.score[actual_game.home_team])**2
-        sse_away = (predited_game.score[actual_game.away_team] - actual_game.score[actual_game.away_team])**2
+        sse_home = (predited_game.score[actual_game.home_team.abbr] - actual_game.score[actual_game.home_team.abbr])**2
+        sse_away = (predited_game.score[actual_game.away_team.abbr] - actual_game.score[actual_game.away_team.abbr])**2
         print(f"SSE Home: {sse_home}")
         print(f"SSE Away: {sse_away}")
         print(f"SSE Total: {sse_home + sse_away}")
@@ -164,7 +173,27 @@ if __name__ == "__main__":
         # print(f"Score: {predicted_score} - {actual_game.score}")
         if predited_game.result() == actual_game.result():
             number_of_game_results_correct += 1
+        
+        if actual_game.result() == GameResult.HOME_WIN:
+            number_of_home_wins += 1
+            if predited_game.result() == actual_game.result():
+                number_of_home_wins_correct += 1
+        
+        if actual_game.result() == GameResult.AWAY_WIN:
+            number_of_away_wins += 1
+            if predited_game.result() == actual_game.result():
+                number_of_away_wins_correct += 1
+        
+        if actual_game.result() == GameResult.DRAW:
+            number_of_draws += 1
+            if predited_game.result() == actual_game.result():
+                number_of_draws_correct += 1
 
-    print(f"Number of game results correct: {number_of_game_results_correct} out of {len(season)}")
-    print(f"Percentage of game results correct: {number_of_game_results_correct/len(season)*100}%")
+    print(f"Home wins correct {number_of_home_wins_correct} out of {number_of_home_wins}.")
+    print(f"Away wins correct {number_of_away_wins_correct} out of {number_of_away_wins}.")
+    print(f"Draws correct {number_of_draws_correct} out of {number_of_draws}.")
+
+
+    print(f"Number of game results correct: {number_of_game_results_correct} out of {len(season2024_25)}")
+    print(f"Percentage of game results correct: {number_of_game_results_correct/len(season2024_25)*100}%")
     

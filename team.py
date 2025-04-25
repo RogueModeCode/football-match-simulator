@@ -29,6 +29,11 @@ class Team:
             result+= str(player) +"\n"
 
         return result
+    
+    def __repr__(self):
+        result = f"\nTeam: {self.name}"
+        
+        return result
 
     def team_strength(self):
         total = 0

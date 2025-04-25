@@ -5,10 +5,11 @@ POSITION_STRENGTH = { "GK": 1.2, "DEF": 1.0, "MID":1.1, "FWD": 1.2 }
 
 # --- Team Class ---
 class Team:
-    def __init__(self, name, abbr):
+    def __init__(self, name, abbr, red_cards:int=0):
         self.name = name
         self.abbr = abbr
         self.players = []
+        self.red_cards = red_cards
 
     def add_player(self, player):
         if len(self.players) < 11:
@@ -37,6 +38,8 @@ class Team:
         return total
     
     def random_player_by_position(self, position):
+        if [p for p in self.players if p.position == position] == []:
+            return None 
         random_player = random.choice([p for p in self.players if p.position == position])
         return random_player
 

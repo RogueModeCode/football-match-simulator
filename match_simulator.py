@@ -1,6 +1,6 @@
 import random
 from collections import Counter
-from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid, man_city, man_utd, tottenham, newcastle, nottingham_forest, aston_villa, bournemouth, fulham, brighton, brentford, crystal_palace, everton, wolves, west_ham, leicester_city, southampton
+from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid, manchester_city, manchester_united, tottenham, newcastle, nottingham_forest, aston_villa, bournemouth, fulham, brighton, brentford, crystal_palace, everton, wolverhampton, west_ham, leichester, southampton
 from game import Game, GameResult, season
 
 SCORE_PER_MIN_PROB = 0.05
@@ -17,7 +17,6 @@ def simulate_match(team1, team2):
     score1 = 0
     score2 = 0
     yellow_cards = 0
-    red_cards = 0
     carded_players = []
     events = []
 
@@ -37,13 +36,22 @@ def simulate_match(team1, team2):
             else:
                 carded_player = random.choice([p for p in team2.players if p.position == "FWD" or p.position == "MID" or p.position == "DEF"])
             if carded_player in carded_players or random.random() < .05:
-                red_cards += 1
+                carded_player.team.red_cards += 1
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a red card"))
                 carded_player.team.remove_player(carded_player)
             else:
                 yellow_cards += 1
                 events.append((round(second/60), f"{carded_player.name} ({carded_player.team.abbr}) was given a yellow card"))
                 carded_players.append(carded_player)
+        # forfeit  
+        if team1.red_cards == 5:
+            events.append((round(second/60), f"{team2.name} forfeit due to recieving five red cards"))
+            game = Game(team1, team2, score1, score2, events, 0,00) 
+            return game
+        if team2.red_cards == 5:
+            events.append((round(second/60), f"{team2.name} forfeit due to recieving five red cards"))
+            game = Game(team1, team2, score1, score2, events, 0,00) 
+            return game
 
         if second > 60 * 60:
             if random.random() < SUB_PER_MIN_PROB/60:
@@ -69,8 +77,10 @@ def simulate_scoring_event(attacking_team, defending_team, second, events, attac
             scorer = attacking_team.random_player_by_position("GK")
 
         goalie = defending_team.random_player_by_position("GK")
-
-        if random.random()*goalie.rating > random.random()*scorer.rating:
+        if scorer == None:
+            #shot never happened
+            pass
+        elif random.random()*goalie.rating > random.random()*scorer.rating:
             #shot saved
             events.append((round(second/60), f"{goalie.name} ({defending_team.abbr}) saved {scorer.name}'s ({attacking_team.abbr}) shot"))
         else: 
@@ -96,7 +106,6 @@ def generate_match_report(game):
         print(f"\n🌟 Man of the Match: {mvp}")
     else:
         print("\nNo goals were scored.")
-
 
 def find_mvp(game):
     if game.score1 + game.score2 == 0:

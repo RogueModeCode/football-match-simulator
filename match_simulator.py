@@ -1,4 +1,5 @@
 import random
+import copy
 from collections import Counter
 from teams_database import plymouth_argyle, famalicao, chelsea, arsenal, liverpool, real_madrid, manchester_city, manchester_united, tottenham, newcastle, nottingham_forest, aston_villa, bournemouth, fulham, brighton, brentford, crystal_palace, everton, wolverhampton, west_ham, leichester, southampton
 from game import Game, GameResult, season
@@ -137,12 +138,16 @@ if __name__ == "__main__":
     number_of_game_results_correct = 0
 
     for actual_game in season:
+        
         print(f"\nActual Result:")
         print(f"{actual_game.home_team.name} vs {actual_game.away_team.name}: {actual_game.score[actual_game.home_team]} - {actual_game.score[actual_game.away_team]}")
         print(f"{actual_game.result()}")
 
+        home_team_copy = copy.deepcopy(actual_game.home_team)
+        away_team_copy = copy.deepcopy(actual_game.away_team)
+
         # Simulate match
-        predited_game = simulate_match(actual_game.home_team, actual_game.away_team)
+        predited_game = simulate_match(home_team_copy, away_team_copy)
 
         print(f"Predicted Result:")
         print(f"{predited_game.home_team.name} vs {predited_game.away_team.name}: {predited_game.score[predited_game.home_team]} - {predited_game.score[predited_game.away_team]}")

@@ -89,50 +89,50 @@ for player in ipswich_players:
     ipswich.add_player(player)
 
 #man city
-man_city = Team("Manchester City", "MCI")
+manchester_city = Team("Manchester City", "MCI")
 man_city_players = [
-    Player("Ederson", "GK", 88, man_city),
-    Player("Rúben Dias", "DEF", 88, man_city),
-    Player("Kyle Walker", "DEF", 85, man_city),
-    Player("Joško Gvardiol", "DEF", 82, man_city),
-    Player("Nathan Aké", "DEF", 81, man_city),
-    Player("Rodri", "MID", 91, man_city),
-    Player("Kevin De Bruyne", "MID", 90, man_city),
-    Player("Bernardo Silva", "MID", 88, man_city),
-    Player("Erling Haaland", "FWD", 91, man_city),
-    Player("Phil Foden", "FWD", 88, man_city),
-    Player("Juack Grealish", "FWD", 84, man_city),
+    Player("Ederson", "GK", 88, manchester_city),
+    Player("Rúben Dias", "DEF", 88, manchester_city),
+    Player("Kyle Walker", "DEF", 85, manchester_city),
+    Player("Joško Gvardiol", "DEF", 82, manchester_city),
+    Player("Nathan Aké", "DEF", 81, manchester_city),
+    Player("Rodri", "MID", 91, manchester_city),
+    Player("Kevin De Bruyne", "MID", 90, manchester_city),
+    Player("Bernardo Silva", "MID", 88, manchester_city),
+    Player("Erling Haaland", "FWD", 91, manchester_city),
+    Player("Phil Foden", "FWD", 88, manchester_city),
+    Player("Juack Grealish", "FWD", 84, manchester_city),
     # Substitutes
-    Player("Matheus Nunes", "MID", 83, man_city),
-    Player("Manuel Akanji", "DEF", 83, man_city),
-    Player("Stefan Ortega", "GK", 80, man_city),
+    Player("Matheus Nunes", "MID", 83, manchester_city),
+    Player("Manuel Akanji", "DEF", 83, manchester_city),
+    Player("Stefan Ortega", "GK", 80, manchester_city),
 ]
 
 for player in man_city_players:
-    man_city.add_player(player)
+    manchester_city.add_player(player)
 
 #man U
-man_utd = Team("Manchester United FC", "MUN")
+manchester_united = Team("Manchester United FC", "MUN")
 man_utd_players = [
-    Player("André Onana", "GK", 83, man_utd),
-    Player("Diogo Dalot", "DEF", 82, man_utd),
-    Player("Matthijs de Ligt", "DEF", 84, man_utd),
-    Player("Lisandro Martínez", "DEF", 84, man_utd),
-    Player("Luke Shaw", "DEF", 82, man_utd),
-    Player("Bruno Fernandes", "MID", 87, man_utd),
-    Player("Casemiro", "MID", 84, man_utd),
-    Player("Kobbie Mainoo", "MID", 77, man_utd),
-    Player("Hojlund", "FWD", 78, man_utd),
-    Player("Alejandro Garnacho", "FWD", 79, man_utd),
-    Player("Scott McTominay", "FWD", 80, man_utd),
+    Player("André Onana", "GK", 83, manchester_united),
+    Player("Diogo Dalot", "DEF", 82, manchester_united),
+    Player("Matthijs de Ligt", "DEF", 84, manchester_united),
+    Player("Lisandro Martínez", "DEF", 84, manchester_united),
+    Player("Luke Shaw", "DEF", 82, manchester_united),
+    Player("Bruno Fernandes", "MID", 87, manchester_united),
+    Player("Casemiro", "MID", 84, manchester_united),
+    Player("Kobbie Mainoo", "MID", 77, manchester_united),
+    Player("Hojlund", "FWD", 78, manchester_united),
+    Player("Alejandro Garnacho", "FWD", 79, manchester_united),
+    Player("Scott McTominay", "FWD", 80, manchester_united),
     # Substitutes
-    Player("Harry Maguire", "DEF", 80, man_utd),
-    Player("Mason Mount", "MID", 78, man_utd),
-    Player("Altay Bayındır", "GK", 76, man_utd),
+    Player("Harry Maguire", "DEF", 80, manchester_united),
+    Player("Mason Mount", "MID", 78, manchester_united),
+    Player("Altay Bayındır", "GK", 76, manchester_united),
 ]
 
 for player in man_utd_players:
-    man_utd.add_player(player)
+    manchester_united.add_player(player)
 
 #Spurs
 tottenham = Team("Tottenham Hotspur FC", "TOT")
@@ -365,27 +365,27 @@ for player in everton_players:
     everton.add_player(player)
 
 #wolves
-wolves = Team("Wolverhampton Wanderers FC", "WOL")
+wolverhampton = Team("Wolverhampton Wanderers FC", "WOL")
 wolves_players = [
-    Player("José Sá", "GK", 81, wolves),
-    Player("Rayan Aït-Nouri", "DEF", 81, wolves),
-    Player("Craig Dawson", "DEF", 79, wolves),
-    Player("Santiago Bueno", "DEF", 78, wolves),
-    Player("Emmanuel Agbadou", "DEF", 77, wolves),
-    Player("Mario Lemina", "MID", 80, wolves),
-    Player("João Gomes", "MID", 78, wolves),
-    Player("Tommy Doyle", "MID", 76, wolves),
-    Player("Matheus Cunha", "FWD", 81, wolves),
-    Player("Hwang Hee-Chan", "FWD", 79, wolves),
-    Player("Raúl Jiménez", "FWD", 78, wolves),
+    Player("José Sá", "GK", 81, wolverhampton),
+    Player("Rayan Aït-Nouri", "DEF", 81, wolverhampton),
+    Player("Craig Dawson", "DEF", 79, wolverhampton),
+    Player("Santiago Bueno", "DEF", 78, wolverhampton),
+    Player("Emmanuel Agbadou", "DEF", 77, wolverhampton),
+    Player("Mario Lemina", "MID", 80, wolverhampton),
+    Player("João Gomes", "MID", 78, wolverhampton),
+    Player("Tommy Doyle", "MID", 76, wolverhampton),
+    Player("Matheus Cunha", "FWD", 81, wolverhampton),
+    Player("Hwang Hee-Chan", "FWD", 79, wolverhampton),
+    Player("Raúl Jiménez", "FWD", 78, wolverhampton),
     # Substitutes
-    Player("Daniel Bentley", "GK", 75, wolves),
-    Player("Sam Johnstone", "GK", 77, wolves),
-    Player("Bastien Meupiyou", "DEF", 74, wolves),
+    Player("Daniel Bentley", "GK", 75, wolverhampton),
+    Player("Sam Johnstone", "GK", 77, wolverhampton),
+    Player("Bastien Meupiyou", "DEF", 74, wolverhampton),
 ]
 
 for player in wolves_players:
-    wolves.add_player(player)
+    wolverhampton.add_player(player)
 
 #West Ham
 west_ham = Team("West Ham United FC", "WHU")
@@ -411,27 +411,27 @@ for player in west_ham_players:
     west_ham.add_player(player)
 
 #leicster city
-leicester_city = Team("Leicester City FC", "LCFC")
-leicester_city_players = [
-    Player("Mads Hermansen", "GK", 76, leicester_city),
-    Player("Ricardo Pereira", "DEF", 78, leicester_city),
-    Player("Wout Faes", "DEF", 77, leicester_city),
-    Player("Harry Souttar", "DEF", 76, leicester_city),
-    Player("Timothy Castagne", "DEF", 77, leicester_city),
-    Player("Wilfred Ndidi", "MID", 78, leicester_city),
-    Player("Oliver Skipp", "MID", 77, leicester_city),
-    Player("Kiernan Dewsbury-Hall", "MID", 77, leicester_city),
-    Player("Jamie Vardy", "FWD", 77, leicester_city),
-    Player("Patson Daka", "FWD", 76, leicester_city),
-    Player("Kelechi Iheanacho", "FWD", 77, leicester_city),
+leichester = Team("Leicester City FC", "LCFC")
+leichester_city_players = [
+    Player("Mads Hermansen", "GK", 76, leichester),
+    Player("Ricardo Pereira", "DEF", 78, leichester),
+    Player("Wout Faes", "DEF", 77, leichester),
+    Player("Harry Souttar", "DEF", 76, leichester),
+    Player("Timothy Castagne", "DEF", 77, leichester),
+    Player("Wilfred Ndidi", "MID", 78, leichester),
+    Player("Oliver Skipp", "MID", 77, leichester),
+    Player("Kiernan Dewsbury-Hall", "MID", 77, leichester),
+    Player("Jamie Vardy", "FWD", 77, leichester),
+    Player("Patson Daka", "FWD", 76, leichester),
+    Player("Kelechi Iheanacho", "FWD", 77, leichester),
     # Substitutes
-    Player("Hamza Choudhury", "MID", 72, leicester_city),
-    Player("Jannik Vestergaard", "DEF", 75, leicester_city),
-    Player("Daniel Iversen", "GK", 75, leicester_city),
+    Player("Hamza Choudhury", "MID", 72, leichester),
+    Player("Jannik Vestergaard", "DEF", 75, leichester),
+    Player("Daniel Iversen", "GK", 75, leichester),
 ]
 
-for player in leicester_city_players:
-    leicester_city.add_player(player)
+for player in leichester_city_players:
+    leichester.add_player(player)
 
 #southampton
 southampton = Team("Southampton FC", "SOU")
